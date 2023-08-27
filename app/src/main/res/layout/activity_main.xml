@@ -1,57 +1,59 @@
 <?xml version="1.0" encoding="utf-8"?>
-<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
-    xmlns:app="http://schemas.android.com/apk/res-auto"
-    xmlns:tools="http://schemas.android.com/tools"
-    android:layout_width="match_parent"
-    android:layout_height="match_parent"
-    android:background="@color/grey"
-    tools:context=".MainActivity">
-
-    <TextView
-            android:id="@+id/logo"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_marginVertical="10sp"
-            android:background="#FF0E0E"
-            android:fontFamily="@font/lobster"
-            android:text="@string/logo"
-            android:textAlignment="center"
-            android:textColor="#FFFFFF"
-            android:textSize="30sp"
-            app:layout_constraintTop_toTopOf="parent"/>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+                xmlns:app="http://schemas.android.com/apk/res-auto"
+                xmlns:tools="http://schemas.android.com/tools"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:background="@color/colorPrimary"
+                android:foregroundTint="#000000"
+                android:visibility="visible"
+                tools:context=".MainActivity">
 
     <EditText
             android:id="@+id/user_field"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_below="@id/logo"
-            android:layout_marginHorizontal="30sp"
-            android:backgroundTint="@color/cardview_light_background"
+            android:layout_below="@id/loggo"
+            android:layout_marginHorizontal="50sp"
+            android:layout_marginTop="100sp"
+            android:backgroundTint="@color/colorAccent"
             android:ems="10"
             android:hint="@string/hint_user_field"
-            app:layout_constraintTop_toBottomOf = "@id/logo"
-            app:layout_constraintLeft_toLeftOf = "parent"
-            android:autofillHints=""/>
+            android:inputType="text"
+            android:minHeight="48dp"
+            android:textColor="@color/textColor"
+            android:textColorHint="@color/textColorHint" />
 
     <Button
             android:id="@+id/main_btn"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_below="@id/user_field"
-            android:layout_marginHorizontal="60sp"
-            android:text="@string/button_text"
-            app:layout_constraintTop_toBottomOf = "@id/user_field"
-            />
+            android:layout_marginHorizontal="130sp"
+            android:layout_marginTop="20sp"
+            android:backgroundTint="@color/colorAccent"
+            android:fontFamily="@font/montserrat_bold"
+            android:text="@string/main_btn" />
 
     <TextView
-        android:id="@+id/result"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_below="@id/logo"
-        android:layout_marginHorizontal="30sp"
-        android:backgroundTint="@color/cardview_light_background"
-        android:ems="10"
-        android:hint="@string/hint_result"
-        app:layout_constraintTop_toBottomOf = "@id/main_btn" />
+            android:id="@+id/loggo"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="50sp"
+            android:fontFamily="@font/montserrat_bold"
+            android:text="@string/logo"
+            android:textAlignment="center"
+            android:textColor="@color/textColor"
+            android:textSize="30sp" />
 
-</androidx.constraintlayout.widget.ConstraintLayout>
+    <TextView
+            android:id="@+id/result_info"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_below="@id/main_btn"
+            android:layout_marginTop="50sp"
+            android:fontFamily="@font/montserrat_bold"
+            android:textAlignment="center"
+            android:textColor="@color/textColorHint"
+            android:textSize="25sp" />
+</RelativeLayout>

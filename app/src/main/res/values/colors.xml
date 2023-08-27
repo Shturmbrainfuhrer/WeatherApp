@@ -8,4 +8,9 @@
     <color name="black">#FF000000</color>
     <color name="grey">#FFCCCCCC</color>
     <color name="white">#FFFFFFFF</color>
+    <color name="colorPrimary">#333</color>
+    <color name="colorPrimaryDark">#000</color>
+    <color name="colorAccent">#00BCD4</color>
+    <color name="textColor">#fff</color>
+    <color name="textColorHint">#ccc</color>
 </resources>

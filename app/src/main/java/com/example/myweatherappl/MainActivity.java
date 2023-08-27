@@ -1,8 +1,8 @@
 package com.example.myweatherappl;
 
-import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
 
+import android.annotation.SuppressLint;
 import android.os.AsyncTask;
 import android.os.Bundle;
 import android.view.View;
@@ -25,8 +25,8 @@ import java.net.URL;
 public class MainActivity extends AppCompatActivity {
 
     private EditText user_field;
-    private Button main_btn;
-    private TextView result;
+    private Button main_bn;
+    private TextView result_info;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -34,31 +34,32 @@ public class MainActivity extends AppCompatActivity {
         setContentView(R.layout.activity_main);
 
         user_field = findViewById(R.id.user_field);
-        main_btn = findViewById(R.id.main_btn);
-        result = findViewById(R.id.result);
+        main_bn = findViewById(R.id.main_btn);
+        result_info = findViewById(R.id.result_info);
 
-        main_btn.setOnClickListener(new View.OnClickListener(){
-
+        main_bn.setOnClickListener(new View.OnClickListener() {
             @Override
-            public void onClick(View view){
-                if (user_field.getText().toString().trim().equals("")){
+            public void onClick(View view) {
+                if(user_field.getText().toString().trim().equals(""))
                     Toast.makeText(MainActivity.this, R.string.no_user_input, Toast.LENGTH_LONG).show();
-                } else {
+                else {
                     String city = user_field.getText().toString();
-                    String key = "94af571bd71bcfcd8ac8c23a3da17efb";
-                    String url = "https://api.openweathermap.org/data/2.5/weather?q="+city+"&appid=" + key+"&units=metric&lang=ru";
+                    String key = "c4c852fc82fa2ecc8143a9378a0a5d2a";
+                    String url = "https://api.openweathermap.org/data/2.5/weather?q=" + city + "&appid=" + key + "&units=metric&lang=ru";
 
                     new GetURLData().execute(url);
+
                 }
             }
         });
     }
 
+    @SuppressLint("StaticFieldLeak")
     private class GetURLData extends AsyncTask<String, String, String> {
 
-        protected void onPreExecute(){
+        protected void onPreExecute() {
             super.onPreExecute();
-            result.setText("Ждите нах...");
+            result_info.setText("Ожидайте...");
         }
 
         @Override
@@ -70,44 +71,41 @@ public class MainActivity extends AppCompatActivity {
                 URL url = new URL(strings[0]);
                 connection = (HttpURLConnection) url.openConnection();
                 connection.connect();
+
                 InputStream stream = connection.getInputStream();
                 reader = new BufferedReader(new InputStreamReader(stream));
 
-                StringBuffer buffer = new StringBuffer();
-                String line;
+                StringBuilder buffer = new StringBuilder();
+                String line = "";
 
-                while ((line = reader.readLine()) != null){
-                    buffer.append(line+'\n');
-                }
+                while ((line = reader.readLine()) != null)
+                    buffer.append(line).append("\n");
 
-                return buffer.toString();
+                return  buffer.toString();
 
-            } catch (MalformedURLException e) {
-                e.printStackTrace();
             } catch (IOException e) {
                 e.printStackTrace();
             } finally {
-                if (connection != null) {
+                if(connection != null)
                     connection.disconnect();
-                }
 
-                if (reader != null) {
-                    try {
+                try {
+                    if (reader != null)
                         reader.close();
-                    } catch (IOException e) {
-                        e.printStackTrace();
-                    }
+                } catch (IOException e) {
+                    e.printStackTrace();
                 }
             }
             return null;
         }
-
+        @SuppressLint("SetTextI18n")
         @Override
-        protected void onPostExecute(String s) {
-            super.onPostExecute(s);
+        protected void onPostExecute(String result) {
+            super.onPostExecute(result);
+
             try {
-                JSONObject object =  new JSONObject(s);
-                result.setText("Температура: "+object.getJSONObject("main").getDouble("temp"));
+                JSONObject jsonObject = new JSONObject(result);
+                result_info.setText("Температура " + jsonObject.getJSONObject("main").getDouble("temp"));
             } catch (JSONException e) {
                 e.printStackTrace();
             }
