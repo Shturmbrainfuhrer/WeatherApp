@@ -47,9 +47,8 @@ public class MainActivity extends AppCompatActivity {
                     String city = user_field.getText().toString();
                     String key = "94af571bd71bcfcd8ac8c23a3da17efb";
                     String url = "https://api.openweathermap.org/data/2.5/weather?q="+city+"&appid=" + key+"&units=metric&lang=ru";
-                    // https://api.openweathermap.org/data/2.5/weather?q=Tomsk&appid=94af571bd71bcfcd8ac8c23a3da17efb&units=metric&lang=ru
 
-                    new GetURLData().execute();
+                    new GetURLData().execute(url);
                 }
             }
         });
